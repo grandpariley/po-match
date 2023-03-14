@@ -1,2 +1,2 @@
 # po-match
-protfolio optimization matcher
+portfolio optimization matcher
