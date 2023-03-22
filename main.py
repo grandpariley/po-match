@@ -1,13 +1,13 @@
 import json
 
 from pkg.bucket import Bucket
-from pkg.respondent import Respondent
+from pkg.respondent import parse
 
 
 def main():
     with open('data.json') as json_file:
         data = json.load(json_file)
-        responses = [Respondent(d) for d in data]
+        responses = [parse(d) for d in data]
         buckets = {
             "risk_tolerance": Bucket(lambda r: r.risk_tolerance, responses).buckets,
             "environment": Bucket(lambda r: r.environment, responses).buckets,
