@@ -1,6 +1,7 @@
 import unittest
 
-from pkg.parse import get_numeric_risk, parse_environment_tolerance, parse_social_tolerance, parse_governance_tolerance
+from pkg.respondent import get_numeric_risk, parse_environment_tolerance, parse_social_tolerance, \
+    parse_governance_tolerance
 
 
 def get_short():

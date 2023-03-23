@@ -1,2 +1,2 @@
 class Constants:
-    NUMBER_OF_BUCKETS = 5
+    NUMBER_OF_BUCKETS = 3
