@@ -4,7 +4,8 @@ from pkg.consts import Constants
 
 
 def generate(getter, responses):
-    data = sorted([getter(r) for r in responses])
+    responses = filter(lambda r: bool(r), [getter(r) for r in responses])
+    data = sorted(responses)
     buckets = []
     i = 0
     step = floor(len(data) / Constants.NUMBER_OF_BUCKETS)
@@ -16,17 +17,6 @@ def generate(getter, responses):
         else:
             buckets.append((data[i], data[i + step]))
         i += step
+    buckets[-1] = (buckets[-1][0], None)
     return buckets
 
-
-def get(response, all_buckets, bucket_type):
-    buckets = all_buckets[bucket_type]
-    r = response[bucket_type]
-    for b in buckets:
-        if b[0] is None and b[1] > r:
-            return b
-        elif b[1] is None and b[0] <= r:
-            return b
-        elif b[0] is not None and b[1] is not None and b[0] <= r < b[1]:
-            return b
-    raise ValueError('No bucket found!')

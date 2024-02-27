@@ -18,6 +18,8 @@ def get_numeric_risk(r, num_answers):
 
 
 def parse_risk_tolerance(risk):
+    if not risk:
+        return None
     score = 0
     score += get_numeric_risk(risk['r1'], 5)
     score += get_numeric_risk(risk['r2'], 4)
@@ -33,11 +35,14 @@ def parse_risk_tolerance(risk):
 
 
 def parse_environment_tolerance(short, long):
-    if short['q1'] != "A" or long is None:
+    if not short:
+        return None
+    if short['q1'] != "A" or not long:
         return 0
     score = 0
     score += sum([1.00 if i is not None else 0 for i in long['q3']]) / float(len(long['q3']))
-    score += long['q4a'] / 100.00
+    if long['q4a']:
+        score += long['q4a'] / 100.00
     if long['q5'] != 'A':
         return score
     score += sum([1.00 if i is not None else 0 for i in long['q6']]) / float(len(long['q6']))
@@ -45,11 +50,14 @@ def parse_environment_tolerance(short, long):
 
 
 def parse_social_tolerance(short, long):
-    if short['q1'] != "A" or long is None:
+    if not short:
+        return None
+    if short['q1'] != "A" or not long:
         return 0
     score = 0
     score += sum([1.00 if i is not None else 0 for i in long['q3']]) / float(len(long['q3']))
-    score += long['q4b'] / 100.00
+    if long['q4b']:
+        score += long['q4b'] / 100.00
     if long['q5'] != 'A':
         return score
     score += sum([1.00 if i is not None else 0 for i in long['q7']]) / float(len(long['q7']))
@@ -57,11 +65,14 @@ def parse_social_tolerance(short, long):
 
 
 def parse_governance_tolerance(short, long):
-    if short['q1'] != "A" or long is None:
+    if not short:
+        return None
+    if short['q1'] != "A" or not long:
         return 0
     score = 0
     score += sum([1 if i is not None else 0 for i in long['q3']]) / float(len(long['q3']))
-    score += long['q4c'] / 100.00
+    if long['q4c']:
+        score += long['q4c'] / 100.00
     if long['q5'] != 'A':
         return score
     score += sum([1 if i is not None else 0 for i in long['q8']]) / float(len(long['q8']))
