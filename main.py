@@ -2,7 +2,7 @@ import json
 import os
 
 from pkg.bucket import generate
-from pkg.respondent import parse
+from pkg.response import parse
 
 BUCKET_FILE = 'buckets.json'
 RESPONSE_FILE = 'response.json'
