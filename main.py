@@ -1,5 +1,4 @@
 import json
-import os
 
 from pkg.bucket import generate
 from pkg.response import parse
@@ -26,8 +25,7 @@ def create_buckets():
 
 
 def main():
-    if not os.path.exists(BUCKET_FILE) or not os.path.exists(RESPONSE_FILE):
-        create_buckets()
+    create_buckets()
 
 
 if __name__ == '__main__':
