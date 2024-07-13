@@ -1,15 +1,15 @@
 import json
-from pathlib import Path
+import os
+
 from pkg.bucket import generate
 from pkg.respondent import parse
 
 BUCKET_FILE = 'buckets.json'
-DATA_FILE = 'posurvey.posurvey.json'
 RESPONSE_FILE = 'response.json'
 
 
 def create_buckets():
-    with open(DATA_FILE) as json_file:
+    with open('posurvey.posurvey.json') as json_file:
         data = json.load(json_file)
         responses = [parse(d) for d in data]
 
@@ -26,7 +26,7 @@ def create_buckets():
 
 
 def main():
-    if not Path(BUCKET_FILE).exists() or not Path(RESPONSE_FILE).exists():
+    if not os.path.exists(BUCKET_FILE) or not os.path.exists(RESPONSE_FILE):
         create_buckets()
 
 
