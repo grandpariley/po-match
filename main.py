@@ -3,12 +3,9 @@ import json
 from pkg.bucket import generate
 from pkg.response import parse
 
-BUCKET_FILE = 'buckets.json'
-RESPONSE_FILE = 'response.json'
-
 
 def create_buckets():
-    with open('posurvey.posurvey.json') as json_file:
+    with open('posurvey.posurvey.json', 'r') as json_file:
         data = json.load(json_file)
         responses = [parse(d) for d in data]
 
@@ -18,9 +15,9 @@ def create_buckets():
             "social": generate(lambda r: r['social'], responses),
             "governance": generate(lambda r: r['governance'], responses)
         }
-        with open(RESPONSE_FILE, 'a') as response_file:
+        with open('response.json', 'w') as response_file:
             json.dump(responses, response_file)
-        with open(BUCKET_FILE, 'a') as bucket_file:
+        with open('buckets.json', 'w') as bucket_file:
             json.dump(buckets, bucket_file)
 
 
