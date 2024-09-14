@@ -1,3 +1,42 @@
+from pydantic import BaseModel
+
+
+class RiskSurvey(BaseModel):
+    r1: str
+    r10: str
+    r2: str
+    r3: str
+    r4: str
+    r5: str
+    r6: str
+    r7: str
+    r8: str
+    r9: str
+
+
+class ShortSurvey(BaseModel):
+    q1: str
+
+
+class LongSurvey(BaseModel):
+    q2: str
+    q3: list[int]
+    q4a: int
+    q4b: int
+    q4c: int
+    q5: str
+    q6: list[int]
+    q7: list[int]
+    q8: list[int]
+    q9: str
+
+
+class Response(BaseModel):
+    risk: RiskSurvey
+    short: ShortSurvey
+    long: LongSurvey
+
+
 def get_numeric_risk(r, num_answers):
     if r == 'A':
         return -2
