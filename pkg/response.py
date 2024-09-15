@@ -1,40 +1,67 @@
-from pydantic import BaseModel
+import json
+from typing import Optional, List
 
+from bson import ObjectId
+from pydantic import BaseModel, Field, ConfigDict
+
+
+class ResponseJSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 class RiskSurvey(BaseModel):
-    r1: str
-    r10: str
-    r2: str
-    r3: str
-    r4: str
-    r5: str
-    r6: str
-    r7: str
-    r8: str
-    r9: str
+    r1: Optional[str] = None
+    r10: Optional[str] = None
+    r2: Optional[str] = None
+    r3: Optional[str] = None
+    r4: Optional[str] = None
+    r5: Optional[str] = None
+    r6: Optional[str] = None
+    r7: Optional[str] = None
+    r8: Optional[str] = None
+    r9: Optional[str] = None
+    model_config = ConfigDict(
+        populate_by_name=True,
+        arbitrary_types_allowed=True,
+    )
 
 
 class ShortSurvey(BaseModel):
-    q1: str
+    q1: Optional[str] = None
+    model_config = ConfigDict(
+        populate_by_name=True,
+        arbitrary_types_allowed=True,
+    )
 
 
 class LongSurvey(BaseModel):
-    q2: str
-    q3: list[int]
-    q4a: int
-    q4b: int
-    q4c: int
-    q5: str
-    q6: list[int]
-    q7: list[int]
-    q8: list[int]
-    q9: str
+    q2: Optional[str] = None
+    q3: List[Optional[int]] = None
+    q4a: Optional[int] = None
+    q4b: Optional[int] = None
+    q4c: Optional[int] = None
+    q5: Optional[str] = None
+    q6: List[Optional[int]] = None
+    q7: List[Optional[int]] = None
+    q8: List[Optional[int]] = None
+    q9: Optional[str] = None
+    model_config = ConfigDict(
+        populate_by_name=True,
+        arbitrary_types_allowed=True,
+    )
 
 
 class Response(BaseModel):
-    risk: RiskSurvey
-    short: ShortSurvey
-    long: LongSurvey
+    id: Optional[str] = Field(alias="_id", default=None)
+    risk: Optional[RiskSurvey] = None
+    short: Optional[ShortSurvey] = None
+    long: Optional[LongSurvey] = None
+    model_config = ConfigDict(
+        populate_by_name=True,
+        arbitrary_types_allowed=True,
+    )
 
 
 def get_numeric_risk(r, num_answers):
