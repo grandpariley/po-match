@@ -1,7 +1,7 @@
 import unittest
 
-from pkg.bucket import generate, get
-from pkg.consts import Constants
+from po.pkg.bucket import generate, get
+from po.pkg.consts import Constants
 
 
 def get_responses():

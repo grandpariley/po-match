@@ -1,6 +1,6 @@
 import unittest
 
-from pkg.respondent import get_numeric_risk, parse_environment_tolerance, parse_social_tolerance, \
+from po.pkg.respondent import get_numeric_risk, parse_environment_tolerance, parse_social_tolerance, \
     parse_governance_tolerance
 
 

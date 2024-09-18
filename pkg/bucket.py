@@ -1,6 +1,6 @@
 from math import floor
 
-from pkg.consts import Constants
+from po.pkg.consts import Constants
 
 
 def generate(getter, responses):

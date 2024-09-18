@@ -1,7 +1,7 @@
 import json
 
-from pkg.bucket import generate
-from pkg.response import parse
+from pomatch.pkg.bucket import generate
+from pomatch.pkg.response import parse
 
 OBJECTIVES = ['risk_tolerance', 'environment', 'social', 'governance']
 
@@ -18,6 +18,7 @@ def response_to_weight(response, extremes):
     ret = 1 - (risk_tolerance + environment + social + governance)
     return {
         "person": "",
+        "portfolio_id": response['id'],
         "description": "",
         "weights": {
             "var": risk_tolerance / 2,
@@ -30,10 +31,8 @@ def response_to_weight(response, extremes):
     }
 
 
-def get_responses():
-    with open('posurvey.posurvey.json', 'r') as json_file:
-        data = json.load(json_file)
-        return list(filter(lambda d: all(v is not None for v in d.values()), [parse(d) for d in data]))
+def get_responses(raw):
+    return list(filter(lambda d: all(v is not None for v in d.values()), [parse(d) for d in raw]))
 
 
 def get_weights(responses):
