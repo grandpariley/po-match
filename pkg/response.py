@@ -147,6 +147,7 @@ def parse_governance_tolerance(short, long):
 
 def parse(d):
     return {
+        "portfolio_id": str(d['_id']),
         "risk_tolerance": parse_risk_tolerance(d['risk']),
         "environment": parse_environment_tolerance(d['short'], d['long']),
         "social": parse_social_tolerance(d['short'], d['long']),
