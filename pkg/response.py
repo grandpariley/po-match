@@ -1,15 +1,7 @@
-import json
 from typing import Optional, List
 
-from bson import ObjectId
 from pydantic import BaseModel, Field, ConfigDict
 
-
-class ResponseJSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, ObjectId):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
 
 class RiskSurvey(BaseModel):
     r1: Optional[str] = None
