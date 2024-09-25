@@ -73,6 +73,7 @@ def get_numeric_risk(r, num_answers):
             return 1
         if r == 'E':
             return 2
+    return -2
 
 
 def parse_risk_tolerance(risk):
