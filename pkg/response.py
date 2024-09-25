@@ -3,6 +3,10 @@ from typing import Optional, List
 from pydantic import BaseModel, Field, ConfigDict
 
 
+def get_responses(raw):
+    return list(filter(lambda d: all(v is not None for v in d.values()), [parse(d) for d in raw]))
+
+
 class RiskSurvey(BaseModel):
     r1: Optional[str] = None
     r10: Optional[str] = None

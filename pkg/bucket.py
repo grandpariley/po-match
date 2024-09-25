@@ -1,6 +1,14 @@
 from math import floor
 
 from po.pkg.consts import Constants
+from pomatch.pkg.weights import OBJECTIVES
+
+
+def get_buckets(responses):
+    buckets = dict()
+    for o in OBJECTIVES:
+        buckets[o] = generate(lambda r: r[o], responses)
+    return buckets
 
 
 def generate(getter, responses):
@@ -19,4 +27,3 @@ def generate(getter, responses):
         i += step
     buckets[-1] = (buckets[-1][0], None)
     return buckets
-
